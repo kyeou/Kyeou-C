@@ -5,7 +5,7 @@
 #include "Country.h"
 #include <vector>
 using namespace std;
-int main() {
+int country() {
 
     /*
     //Using that class, write a program that reads in a set of countries and prints
