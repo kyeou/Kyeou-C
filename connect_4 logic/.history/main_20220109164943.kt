@@ -2,9 +2,7 @@ import java.util.Arrays
 
 class Grid {
   var grids = Array(7) {Array(7) {Piece(1)}  }
-  fun setPiece(color: Int, x: Int, y: Int) {
-    grids
-  }
+  fun setPiece(color: Int, )
 }
 
 class Piece constructor(color: Int) {

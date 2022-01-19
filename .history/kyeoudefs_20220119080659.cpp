@@ -1,5 +1,5 @@
 #define forL(x, y, z) for(int i = x; i < y; z)
-#define printS(s) std::cout << s << std::endl
+#define printS(s) std::cout << s << std::endl;
 #define randK(x) srand((unsigned int)time(NULL)); 1 + (rand() % x);
 #define ifS(a, b) if (a) b;
 #define ifES(a, b, c, d) if (a) {b} else (c) {d} ;
@@ -11,3 +11,7 @@ int main() {
     printS(x);
 }
 
+//System.out.println(sdfiguasldfgia);
+
+
+//std::cout << some shit here << std::endl;
