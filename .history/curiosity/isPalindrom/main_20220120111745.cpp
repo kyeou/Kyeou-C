@@ -16,7 +16,6 @@ int main()
     return 0;
 }
 
-/*
 bool isPalindrome(std::string word)
 {
     int length = word.length();
@@ -34,20 +33,3 @@ bool isPalindrome(std::string word)
     return true;
 }&
 */
-
-bool isPalindrome(std::string word)
-{
-    int length = word.length();
-    // std::cout << length << std::endl;
-    for (int i = 0; i < (length / 2); i++)
-    {
-        // std::cout << i << std::endl;
-        if (word[i] != word[length - i - 1])
-        {
-            return false;
-        }
-
-    } // end for
-
-    return true;
-}

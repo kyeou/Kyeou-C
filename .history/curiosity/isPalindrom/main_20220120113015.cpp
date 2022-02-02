@@ -5,6 +5,7 @@ bool isPalindrome(std::string word);
 int main()
 {
     std::string tw = "hannah";
+    
     if (isPalindrome(tw) == true)
     {
         std::cout << "true" << std::endl;

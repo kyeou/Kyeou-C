@@ -1,10 +1,10 @@
 /*
 Reimplement the Polynomial class of Exercise P13.14 by using a map<int, double> to store the coefficients.
 */
-#define forL(x) for (int i = 0; i < x; i++)
+#define forL(x) for (int i = 0; i < x; i++) 
 #define printS(s) std::cout << s << std::endl;
 
-// written by christian jarmon
+//written by christian jarmon
 #include <iostream>
 #include <cstdio>
 #include <fstream>
@@ -12,8 +12,8 @@ Reimplement the Polynomial class of Exercise P13.14 by using a map<int, double> 
 #include <cstdlib>
 #include <ctime>
 #include <map>
-// make a pair
-// create the term with a char, and the pair
+//make a pair
+//create the term with a char, and the pair
 class Term
 {
 public:
@@ -22,7 +22,7 @@ public:
         t.first = coeff;
         t.second = expo;
 
-    } // term con ends
+    } //term con ends
 
     int getC()
     {
@@ -40,7 +40,7 @@ public:
 private:
     std::pair<int, int> t;
 
-}; // term ends
+}; //term ends
 
 class Polynomial
 {
@@ -52,18 +52,18 @@ public:
     char findEnd()
     {
         return (char)counter;
-    } // findEnd ends
+    } //findEnd ends
 
     void add(Term *t)
     {
         poly.insert(std::pair<char, Term *>(findEnd(), t));
         counter++;
-    } // add ends
+    } //add ends
 
     std::map<char, Term *> getMap()
     {
         return poly;
-    } // getMap ends
+    } //getMap ends
 
     void toString()
     {
@@ -72,10 +72,10 @@ public:
         for (print = poly.begin(); print != poly.end(); ++print)
         {
             os << (*print).second->getTerm().first << "" << (*print).first << "^" << (*print).second->getTerm().second << " + ";
-        } // for ends
+        } //for ends
         std::string send = os.str();
         printS(send.substr(0, (send.length() - 2)));
-    } // tostring ends
+    } //tostring ends
 
     static void multiply(Polynomial *p, Polynomial *q)
     {
@@ -90,18 +90,18 @@ public:
                 {
                     a->add(new Term(((*polint).second->getTerm().first * (*polint2).second->getTerm().first), ((*polint).second->getTerm().second + (*polint2).second->getTerm().second)));
 
-                } // if ends
-            }     // nested for ends
-        }         // big for ends
+                } //if ends
+            }     //nested for ends
+        }         //big for ends
         a->poly.erase(a->poly.begin());
         printS("\nmultiplied poly")
             a->toString();
-    } // multiply ends
+    } //multiply ends
 
 private:
     int counter = 98;
     std::map<char, Term *> poly;
-}; // poly ends
+}; //poly ends
 
 int main()
 {

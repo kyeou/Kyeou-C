@@ -4,7 +4,8 @@ bool isPalindrome(std::string word);
 
 int main()
 {
-    std::string tw = "hannah";
+    //std::string tw = "hannah";
+   CString daString = _T()
     if (isPalindrome(tw) == true)
     {
         std::cout << "true" << std::endl;

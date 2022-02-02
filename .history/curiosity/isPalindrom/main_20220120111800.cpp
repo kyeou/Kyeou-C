@@ -42,7 +42,7 @@ bool isPalindrome(std::string word)
     for (int i = 0; i < (length / 2); i++)
     {
         // std::cout << i << std::endl;
-        if (word[i] != word[length - i - 1])
+        if (word[i] != word[length - i - 1))
         {
             return false;
         }

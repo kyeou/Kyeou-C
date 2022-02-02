@@ -1,10 +1,11 @@
 #include <iostream>
-
+#include <>
 bool isPalindrome(std::string word);
 
 int main()
 {
     std::string tw = "hannah";
+    CString aCString = tw.c_str();
     if (isPalindrome(tw) == true)
     {
         std::cout << "true" << std::endl;
