@@ -1,0 +1,10 @@
+^C:\USERS\KYEOU\DROPBOX\PC (2)\DESKTOP\STUFF ON GITHUB\KYEOU-C\USING OPENXLSX\OPENXLSX\EXAMPLES\EXTERNAL\NOWIDE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx" "-BC:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/build" --check-stamp-file "C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/build/OpenXLSX/Examples/external/nowide/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

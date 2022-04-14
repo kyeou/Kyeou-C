@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kyeou\Dropbox\PC (2)\Desktop\Stuff On Github\Kyeou-C\using openxlsx\build\CMakeFiles\b5b65eb01e5b5ca452df197eaee506f1\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{38D80FF0-43EC-3551-B31D-9F04053B1500}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

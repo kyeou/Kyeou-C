@@ -1,0 +1,8 @@
+﻿  Building Custom Rule C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/OpenXLSX/Examples/external/nowide/CMakeLists.txt
+  cstdio.cpp
+  cstdlib.cpp
+  filebuf.cpp
+  iostream.cpp
+  stat.cpp
+  Generating Code...
+  nowide.vcxproj -> C:\Users\kyeou\Dropbox\PC (2)\Desktop\Stuff On Github\Kyeou-C\using openxlsx\build\output\Debug\nowide.lib

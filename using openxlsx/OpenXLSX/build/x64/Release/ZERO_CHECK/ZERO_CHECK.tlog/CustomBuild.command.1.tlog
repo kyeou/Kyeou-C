@@ -1,0 +1,10 @@
+^C:\USERS\KYEOU\DROPBOX\PC (2)\DESKTOP\STUFF ON GITHUB\KYEOU-C\USING OPENXLSX\OPENXLSX\BUILD\CMAKEFILES\7D33E11D1207B6DA64CE04988DB873EB\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/OpenXLSX" "-BC:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/OpenXLSX/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/using openxlsx/OpenXLSX/build/OpenXLSX.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
