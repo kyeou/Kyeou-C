@@ -1,0 +1,5 @@
+javac -h . {name}.java
+
+g++ -c -I%JAVA_HOME%\include -I%JAVA_HOME%\include\win32 {name}.cpp -o {name}.o
+
+g++ -shared -o native.dll {name}.o -W

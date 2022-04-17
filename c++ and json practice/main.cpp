@@ -54,24 +54,30 @@ int main()
         printCount = 0;
         for (json::iterator it = RECORD.begin(); it != RECORD.end(); ++it)
         {
-            std::ostringstream qw;
-            qw << "Test Name " << printCount;
-            std::cout << (*it)[qw.str()] << '\n';
-            printCount++;
+            
+            std::cout << (*it)["Name"] << '\n';
         }
+            //int a = RECORD["A_O_T"] ;
+            //a+=2;
+            //RECORD["A_O_T"] = a; 
+
         i.close();
-        std::cout << A_O_T << std::endl;
+       // std::cout << A_O_T << std::endl;
     }
     else
     {
         printf("IS EMPTY\n");
     }
 
+
+
+
+
     std::fstream fileWrite;
     fileWrite.open("example.json", std::ios_base::out);
 
     // printf("Check 1\n");
-
+/*
     for (int i = 0; i < 4; i++)
     {
         std::ostringstream na;
@@ -87,7 +93,7 @@ int main()
         std::cout << (*it)[qw.str()] << '\n';
         printCount++;
     }
-
+*/
     // printf("Check 2\n");
 
     // file >> a;
@@ -102,12 +108,27 @@ int main()
 
     fileWrite.open("example.json", std::ios_base::out);
 
-    j = {
-        {"Name", "FirstName LastName"},
-        {"A_O_T", 0},
-        {"Budgets", {0}},
-        {"Scores", {0}},
-        {"SumDebits", {0}}
+    j[0] = {
+        {"Name", "Monster Energy"},
+        {"A_O_T", 1},
+        {"Budgets", {}},
+        {"Scores", {}},
+        {"SumDebits", 1}
+
+    };
+
+printf("Size of Empty array TEST: %d\n", j[0]["Budgets"].size());
+//int ti = j[0]["Budgets"].size();
+j[0]["Budgets"][j[0]["Budgets"].size()] = 32;
+printf("Size of Empty array TEST: %d\n", j[0]["Budgets"].size());
+
+
+j[1] = {
+        {"Name", "Steven Smith"},
+        {"A_O_T", 2},
+        {"Budgets", {2}},
+        {"Scores", {2}},
+        {"SumDebits", 2}
 
     };
 

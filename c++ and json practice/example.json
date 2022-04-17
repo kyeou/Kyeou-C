@@ -1,13 +1,22 @@
-{
-    "A_O_T": 0,
-    "Budgets": [
-        0
-    ],
-    "Name": "FirstName LastName",
-    "Scores": [
-        0
-    ],
-    "SumDebits": [
-        0
-    ]
-}
+[
+    {
+        "A_O_T": 1,
+        "Budgets": [
+            32
+        ],
+        "Name": "Monster Energy",
+        "Scores": null,
+        "SumDebits": 1
+    },
+    {
+        "A_O_T": 2,
+        "Budgets": [
+            2
+        ],
+        "Name": "Steven Smith",
+        "Scores": [
+            2
+        ],
+        "SumDebits": 2
+    }
+]
