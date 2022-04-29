@@ -1,0 +1,209 @@
+// written by christian jarmon
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int numOfProcs;
+struct node
+{
+	int parent;
+	int child;
+
+} *PCB = NULL;
+
+// Case sensitive...........
+typedef struct node pcb;
+// From now on, PCB is the variable, pcb is the type.
+
+/***************************************************************/
+/*PROCEDURE TO PRINT HIERARCHY OF PROCESSES*/
+void printProcs()
+{
+
+	/* Should print like so
+PCB[0] is the parent of: PCB[1]  PCB[2]
+PCB[2] is the parent of: PCB[3]
+//for i 
+//while 
+//see if parent has child, if it does, get the index of the child, and see if that has a child
+//and so on
+
+
+	*/
+	printf("PCB\t     Parent   Child\n");
+	for (int i = 0; i < numOfProcs; i++)
+	{
+		int w = i;
+		if (PCB[i].child != 1)
+		//printf("Parent #%d", i);
+		/*if (PCB[i].parent != -1)
+		{
+			printf("\t%d", PCB[i].parent);
+		}
+		else
+		{
+			printf("\t");
+		} 
+
+		if (PCB[i].child != -1)
+		{
+			printf("\t%d", PCB[i].child);
+		}
+		else
+		{
+			printf("\t");
+		}
+		printf("\n"); */
+	}
+
+} /* end of procedure */
+
+/***************************************************************/
+/*PROCEDURE FOR OPTION #1*/
+void option1()
+{
+
+	printf("Enter maximum number of processes: ");
+	scanf("%d", &numOfProcs);
+	PCB = (pcb *)malloc(numOfProcs * sizeof(pcb));
+	PCB[0].parent = 0;
+	PCB[0].child = -1;
+	for (int a = 0; a < numOfProcs; a++)
+	{
+		PCB[a].parent = -1;
+		PCB[a].child = -1;
+	}
+
+	return;
+} /* end of procedure */
+
+/***************************************************************/
+//"PROCDURE FOR OPTION #2"
+void create()
+{
+
+	int par, newC = 1, newLink, numC = 0;
+	printf("Enter the parent process index: ");
+	scanf("%d", &par);
+
+	// newC is to be incremented if PCB[newC] has a parent, finding an empty index
+	while (PCB[newC].parent != -1)
+	{
+		newC++;
+	}
+	// record parent
+	PCB[newC].parent = par;
+	PCB[newC].child = -1;
+	if (PCB[par].child == -1)
+	{
+		PCB[par].child = newC;
+		// Should set equal to 1 as no other case is possible if this if-stat is true
+		numC = 1;
+	}
+	else
+	{
+		// if else is reached, numC should be 2
+		numC = 2;
+		// newLink, the index of the next child, should be with the child of par
+		newLink = PCB[par].child;
+		while (PCB[newLink].child != -1)
+		{
+			newLink = PCB[newLink].child;
+			// Increment numC from this point
+			numC++;
+		}
+		PCB[newLink].child = newC;
+		PCB[newC].child = newLink;
+	}
+	printProcs();
+	return;
+} /* end of procedure */
+
+/***************************************************************/
+void destroy(int q)
+{
+
+	if (q == -1)
+	{
+		return;
+	}
+	else
+	{
+		destroy(PCB[q].child);
+		printf("PCB[%d]\t\n", q);
+		PCB[q].parent = -1;
+		PCB[q].child = -1;
+	}
+	return;
+} /* end of procedure */
+
+/***************************************************************/
+
+// should be recursive
+// option 3
+void destroyer()
+{
+
+	int par;
+	printf("Enter the index of the process whose descendants are to be destroyed: ");
+	scanf("%d", &par);
+	destroy(PCB[par].child);
+	PCB[par].child = -1;
+
+	printProcs();
+
+} /* end of procedure */
+
+/***************************************************************/
+//"PROCEDURE FOR OPTION #4"
+void quit()
+{
+
+	if (PCB != NULL)
+	{
+		free(PCB);
+	}
+
+	return;
+} /* end of procedure */
+
+/***************************************************************/
+int main()
+{
+
+	int c;
+	while (c != 4)
+	{
+		printf("\nProcess creation and destruction\n");
+		printf("--------------------------------\n");
+		printf("1) Enter parameters\n");
+		printf("2) Create a new child process\n");
+		printf("3) Destroy all descendants of a process\n");
+		printf("4) Quit program and free memory\n\n");
+		printf("Enter selection: ");
+		scanf("%d", &c);
+		switch (c)
+		{
+		case 1:
+			option1();
+
+			break;
+		case 2:
+			create();
+
+			break;
+		case 3:
+			destroyer();
+			break;
+
+		case 4:
+			quit();
+			break;
+		default:
+			printf("not a choice");
+		} // switch ends
+	}	  // while ends
+
+	printf("End\n");
+	return 1; /* indicates success */
+} /* end of procedure */

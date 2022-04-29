@@ -1,0 +1,3 @@
+C:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 4 - Memory Allocation/build/CMakeFiles/lab4_cs322_kyeou.dir
+C:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 4 - Memory Allocation/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 4 - Memory Allocation/build/CMakeFiles/ZERO_CHECK.dir

@@ -8,6 +8,52 @@
 
 using json = nlohmann::json;
 
+
+
+int main() {
+    json TEST;
+    std::cout << TEST.size() << std::endl;
+    TEST[0]["IDK"] = "FUCKSAKE";
+     TEST[1]["IDK"] = "FUCKSAKE";
+
+     std::cout << TEST.size() << std::endl;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 struct employees
 {
     std::string firstName;
@@ -77,7 +123,7 @@ int main()
     fileWrite.open("example.json", std::ios_base::out);
 
     // printf("Check 1\n");
-/*
+
     for (int i = 0; i < 4; i++)
     {
         std::ostringstream na;
@@ -93,7 +139,7 @@ int main()
         std::cout << (*it)[qw.str()] << '\n';
         printCount++;
     }
-*/
+
     // printf("Check 2\n");
 
     // file >> a;
@@ -135,7 +181,7 @@ j[1] = {
     fileWrite << std::setw(4) << j << std::endl;
 
     return 0;
-}
+}*/
 
 // https://www.geeksforgeeks.org/c-program-to-create-a-file/
 // https://www.tutorialspoint.com/json/json_objects.htm

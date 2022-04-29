@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\Program Files\\Java\\**"
+                "C:\\Program Files\\Java\\**",
+                "${workspaceFolder}"
             ],
             "defines": [
                 "_DEBUG",

@@ -1,0 +1,10 @@
+^C:\USERS\KYEOU\DROPBOX\PC (2)\DESKTOP\CSUN COURSES\SPRING 2022\CS 322\LAB\LAB ASSIGNMENT 5 - DISK SCHEDULING\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 5 - Disk Scheduling" "-BC:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 5 - Disk Scheduling/build" --check-stamp-file "C:/Users/kyeou/Dropbox/PC (2)/Desktop/csun courses/Spring 2022/cs 322/lab/Lab Assignment 5 - Disk Scheduling/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

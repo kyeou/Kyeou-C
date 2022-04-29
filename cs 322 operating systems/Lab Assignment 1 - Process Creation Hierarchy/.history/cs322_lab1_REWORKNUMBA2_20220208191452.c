@@ -1,0 +1,63 @@
+// written by christian jarmon
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int numOfProcs;
+
+struct process
+{
+    int field, parent;
+    struct process *next;
+} *PCB = NULL;
+
+typedef struct process pcb;
+
+void printProcs()
+{
+    for (int i = 0; i < numOfProcs; i++)
+    {
+        if (PCB[i].next != NULL)
+        {
+            printf("PCB[%d] is the parent of: ", i);
+            for (int a = 0; a < numOfProcs; a++)
+            {
+                if (PCB[a].parent == i)
+                {
+                    if (a != i)
+                    {
+                        // printf("\tCHILD FOUND\t");
+                        printf("PCB[%d]\t", a);
+                    }
+                }
+            }
+            printf("\n");
+        }
+    }
+   printf("\n");
+}//func ends
+
+void entParms()
+{
+    printf("Enter maximum number of processes: ");
+    scanf("%d", &numOfProcs);
+    PCB = (pcb *)malloc(numOfProcs * sizeof(pcb));
+    PCB[0].field = 0;
+    PCB[0].next = (pcb *)malloc(sizeof(pcb));
+    PCB[0].next = NULL;
+    for (int m = 1; m < numOfProcs; m++)
+    {
+        PCB[m].field = m;
+        PCB[m].next = (pcb *)malloc(sizeof(pcb));
+        PCB[m].next = NULL;
+    }
+}
+
+void create()
+{
+}
+
+void destroy() {}
+
+void destroyer() {}
