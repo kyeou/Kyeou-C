@@ -5,18 +5,18 @@
 #include <stdbool.h>
 #include <limits.h>
 
-#define for_proc for (int b = 0; b < numProcs; b++)
-#define int_input(msg, var) \
+#define FOR_PROC for (int b = 0; b < numProcs; b++)
+#define INT_INPUT(msg, var) \
     printf(msg);            \
     scanf("%d", &var)
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define min(a, b) (((a) < (b)) ? (a) : (b))
-#define if_then(x, y) \
+#define IF_THEN(x, y) \
     if ((x))          \
     {                 \
         y;            \
     }
-#define alloc(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
 
 int numProcs, cycles = 0;
 
@@ -34,7 +34,7 @@ void prt()
 {
     printf("ID      Arrival Total   Start   End     Turnaround\n");
     printf("--------------------------------------------------\n");
-    for_proc
+    FOR_PROC
     {
         if (PB[b].id)
         {
@@ -57,14 +57,14 @@ void entParms()
 {
     // printf("Enter total number of processes: ");
     // scanf("%d", &numProcs);
-    int_input("Enter total number of processes: ", numProcs);
-    PB = alloc(numProcs,pb);
+    INT_INPUT("Enter total number of processes: ", numProcs);
+    PB = ALLOC(numProcs,pb);
     // printf("%d\n", sizeof(PB));
     for (int b = 0; b < numProcs; b++)
     {
         int z;
-        int_input("Enter process id: ", z);
-        PB[b].id = alloc(1, int);
+        INT_INPUT("Enter process id: ", z);
+        PB[b].id = ALLOC(1, int);
         *(PB[b].id) = z;
         // printf("curr id %d\n", *(PB[b].id));
         printf("Enter arrival cycle for process P[%d]: ", *(PB[b].id));
@@ -88,8 +88,8 @@ bool checkSchedule()
     int c = 0;
     while (true)
     {
-        if_then (c == numProcs, return false)
-        if_then (!(PB[c].done), return true)
+        IF_THEN (c == numProcs, return false)
+        IF_THEN (!(PB[c].done), return true)
         c++; //;)
     }        // end while
 } // end func
@@ -100,12 +100,12 @@ bool checkSchedule()
 pb *currNS()
 {
 
-    pb *earliest = alloc(1, pb);
+    pb *earliest = ALLOC(1, pb);
     earliest->avl = INT_MAX;
 
-    for_proc
+    FOR_PROC
     {
-        if_then (PB[b].avl < earliest->avl && !(PB[b].done), earliest = &PB[b])
+        IF_THEN (PB[b].avl < earliest->avl && !(PB[b].done), earliest = &PB[b])
        
     } // end for
     return earliest;
@@ -121,7 +121,7 @@ void fifo()
     // if not at PB[numProcs], PB[next process].start = current time
     cycles = 0;
 
-    for_proc
+    FOR_PROC
     {
         PB[b].done = 0;
     }
@@ -141,12 +141,12 @@ void fifo()
 
 pb *currSJ()
 {
-    pb *shortest = alloc(1, pb);
+    pb *shortest = ALLOC(1, pb);
     shortest->total_cpu = INT_MAX;
 
-    for_proc
+    FOR_PROC
     {
-        if_then (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
+        IF_THEN (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
     } // end for
     return shortest;
 } // end of process
@@ -157,7 +157,7 @@ void sjf()
     cycles = 0;
     // int curr_star = cycles;
 
-    for_proc
+    FOR_PROC
     {
         PB[b].done = 0;
     }
@@ -176,12 +176,12 @@ void sjf()
 
 pb *currSRT()
 {
-    pb *shortest = alloc(1, pb);
+    pb *shortest = ALLOC(1, pb);
     shortest->tot_rem = INT_MAX;
 
-    for_proc
+    FOR_PROC
     {
-        if_then (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done),  shortest = &PB[b])
+        IF_THEN (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done),  shortest = &PB[b])
        
     } // end for
     return shortest;
@@ -191,7 +191,7 @@ void srt()
 {
 
     cycles = 0;
-    for_proc
+    FOR_PROC
     {
         PB[b].done = PB[b].start_b = 0;
         PB[b].tot_rem = PB[b].total_cpu;
@@ -224,7 +224,7 @@ void srt()
 
 void quit()
 {
-    for_proc
+    FOR_PROC
     {
         PB[b].id = NULL;
         free(PB[b].id);
@@ -245,7 +245,7 @@ int main()
         printf("3) Schedule processes with SJF algorithm\n");
         printf("4) Schedule processes with SRT algorithm\n");
         printf("5) Quit and free memory\n\n");
-        int_input("Enter selection: ", c);
+        INT_INPUT("Enter selection: ", c);
         switch (c)
         {
         case 1:

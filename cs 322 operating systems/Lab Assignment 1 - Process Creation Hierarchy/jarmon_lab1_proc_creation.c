@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define if_then(x, y) \
+#define IF_THEN(x, y) \
     if ((x))          \
     {                 \
         y;            \
     }
-#define alloc(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
 int numOfProcs, aoc;
 
 struct process
@@ -48,7 +48,7 @@ void entParms()
 {
     printf("Enter maximum number of processes: ");
     scanf("%d", &numOfProcs);
-    PCB = alloc(numOfProcs , pcb);
+    PCB = ALLOC(numOfProcs , pcb);
     aoc = 0;
     for (int m = 0; m < numOfProcs; m++)
     {
@@ -91,19 +91,19 @@ void create()
 
 void ridNexts(pcb **next)
 {
-    if_then(!(*next), return ) else
+    IF_THEN(!(*next), return ) else
     {
-        if_then((**next).child, destroy(&((**next).child)))
-            if_then((**next).next, ridNexts(&((**next).next)))
+        IF_THEN((**next).child, destroy(&((**next).child)))
+            IF_THEN((**next).next, ridNexts(&((**next).next)))
                 *next = NULL;
     }
 }
 
 void destroy(int **child)
 {
-    if_then(!(*child), return ) else
+    IF_THEN(!(*child), return ) else
     {
-        if_then(PCB[**child].next, ridNexts(&(PCB[**child].next)))
+        IF_THEN(PCB[**child].next, ridNexts(&(PCB[**child].next)))
             PCB[**child]
                 .parent = -1;
         *child = NULL;
@@ -117,7 +117,7 @@ void destroyer()
         int par;
         printf("Enter the index of the process whose descendants are to be destroyed: ");
         scanf("%d", &par);
-        if_then(PCB[par].child, destroy(&(PCB[par].child)))
+        IF_THEN(PCB[par].child, destroy(&(PCB[par].child)))
     }
     printProcs();
 }
@@ -133,7 +133,7 @@ void printCandN2()
 
 void quit()
 {
-    if_then(PCB, if_then(PCB[0].child, destroy(&(PCB[0].child))))
+    IF_THEN(PCB, IF_THEN(PCB[0].child, destroy(&(PCB[0].child))))
 
         PCB = NULL;
     free(PCB);

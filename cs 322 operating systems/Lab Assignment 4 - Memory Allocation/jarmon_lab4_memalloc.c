@@ -5,22 +5,22 @@
 #include "limits.h"
 #include "stdbool.h"
 
-#define while_bl     \
+#define WHILE_BL     \
     ttp = getHead(); \
     while (ttp != 0)
 
 // make beginning of traversal a head
 
-#define int_input(msg, var) \
+#define INT_INPUT(msg, var) \
     printf(msg);            \
     scanf("%d", &(var))
 
-#define if_then(x, y) \
+#define IF_THEN(x, y) \
     if ((x))          \
     {                 \
         y;            \
     }
-#define alloc(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
 
 int pm_size, amt = 0;
 bool fit_bool;
@@ -38,7 +38,7 @@ bl *ttp;
 
 bl *getHead()
 {
-    bl *q = alloc(1,bl);
+    bl *q = ALLOC(1,bl);
     int a = INT_MAX;
     for (int i = 0; i < amt; i++)
     {
@@ -56,9 +56,9 @@ bl *getHead()
 
 bool checkID(int i)
 {
-    while_bl
+    WHILE_BL
     {
-        if_then (i == ttp->id, return true)
+        IF_THEN (i == ttp->id, return true)
         ttp = ttp->next;
     }
     return false;
@@ -66,12 +66,12 @@ bool checkID(int i)
 // these functions take a new block and its size, and retuns the block it can fit after
 bl *first_fit(bl *btf, int size)
 {
-    bl *ret = alloc(1, bl);
+    bl *ret = ALLOC(1, bl);
      //ret->id = INT_MAX;
     int ts = INT_MAX;
 
     /*printf("IDs (Last number should be 1)-->> ");
-    while_bl
+    WHILE_BL
     {
         printf(" %d-", ttp->id);
         printf(" %zu ", ttp->next == 0);
@@ -80,7 +80,7 @@ bl *first_fit(bl *btf, int size)
     printf("\n");
 */
     bool q = false,  w = false;
-    while_bl
+    WHILE_BL
     {
 
         if (q || w)
@@ -115,7 +115,7 @@ bl *best_fit(bl *btf, int size)
     // head = &(PHY_MEM[0]);
     /*
         printf("BEST FIT-->> IDs (Last number should be 1)-->> ");
-        while_bl
+        WHILE_BL
         {
             printf(" %d-", ttp->id);
             printf("%zu ", ttp->next == 0);
@@ -125,7 +125,7 @@ bl *best_fit(bl *btf, int size)
     */
     // printf("HEAD CHECK BF (Should be 0) --> %d\n", head->id);
    // printf("HC JESUS CHRIST --> %d %d %d\n", getHead()->id, getHead()->start_loc, getHead()->end_loc);
-    while_bl
+    WHILE_BL
     {
         //printf("STILL IN BEST FIT WHILE --> %d %d %d\n", ttp->id, ttp->start_loc, ttp->end_loc);
         // printf("HEAD CHECK (Should be 0) --> %d\n", head->id);
@@ -155,7 +155,7 @@ void prt()
 {
     printf("\nID\tStart\tEnd\n");
     printf("-------------------\n");
-    while_bl
+    WHILE_BL
     {
         printf("%d\t%d\t%d\n", ttp->id, ttp->start_loc, ttp->end_loc);
         ttp = ttp->next;
@@ -164,19 +164,19 @@ void prt()
 
 void entParms()
 {
-    PHY_MEM = alloc(1, bl);
-    bl *ttp = alloc(1, bl);
-    int_input("Enter size of physical memory: ", pm_size);
-    int_input("Enter hole-fitting algorithm (0=first fit, 1=best_fit): ", fit_bool);
+    PHY_MEM = ALLOC(1, bl);
+    bl *ttp = ALLOC(1, bl);
+    INT_INPUT("Enter size of physical memory: ", pm_size);
+    INT_INPUT("Enter hole-fitting algorithm (0=first fit, 1=best_fit): ", fit_bool);
 }
 
-void allocate()
+void ALLOCate()
 {
 
     amt++;
     PHY_MEM = (bl *)realloc(PHY_MEM, amt * sizeof(bl));
-    int_input("Enter block id: ", (PHY_MEM[amt - 1]).id);
-    int_input("Enter block size: ", (PHY_MEM[amt - 1]).size);
+    INT_INPUT("Enter block id: ", (PHY_MEM[amt - 1]).id);
+    INT_INPUT("Enter block size: ", (PHY_MEM[amt - 1]).size);
     if (amt == 1)
     {
       //  printf(" SIZE CHECK-->> %d\n", (PHY_MEM[amt - 1]).size);
@@ -190,7 +190,7 @@ void allocate()
 
         /*
         printf("FIRST BLOCK -->> IDs -->> ");
-        while_bl
+        WHILE_BL
         {
             printf(" %d-", ttp->id);
             printf("%zu ", ttp->next == 0);
@@ -216,7 +216,7 @@ void allocate()
             PHY_MEM[amt - 1].end_loc = PHY_MEM[amt - 1].start_loc + (PHY_MEM[amt - 1]).size;
             /*
                         printf("IDs -->> ");
-                        while_bl
+                        WHILE_BL
                         {
                             printf(" %d-", ttp->id);
                             printf(" %zu ", ttp->next == 0);
@@ -225,7 +225,7 @@ void allocate()
                         printf("\n");
                         */
         }
-        else if_then (!(checkID(temp->id)), printf("Block does not fit\n"))
+        else IF_THEN (!(checkID(temp->id)), printf("Block does not fit\n"))
     } // end else
 
     prt();
@@ -234,19 +234,19 @@ void allocate()
 void delloc()
 {
     int i;
-    bl *d = alloc(1, bl), *h = alloc(1, bl);
+    bl *d = ALLOC(1, bl), *h = ALLOC(1, bl);
 
-    int_input("Enter block id: ", i);
+    INT_INPUT("Enter block id: ", i);
 
-    while_bl
+    WHILE_BL
     {
-        if_then (ttp->id == i, d = ttp; break)
+        IF_THEN (ttp->id == i, d = ttp; break)
         ttp = ttp->next;
     }
 
-    while_bl
+    WHILE_BL
     {
-        if_then (ttp->next == d, h = ttp; break)
+        IF_THEN (ttp->next == d, h = ttp; break)
         ttp = ttp->next;
     }
 
@@ -269,10 +269,10 @@ void defrag()
 {
     // Given a process, if ttp->next->start_loc != ttp->end_loc
     // then, ttp->next->start_loc = ttp->end_loc
-    while_bl
+    WHILE_BL
     {
         // printf("CURR ID --> %d\n", ttp->id);
-        if_then (!(ttp->next), break)
+        IF_THEN (!(ttp->next), break)
         int nextSize = ttp->next->size;
 
         if (ttp->next->start_loc != ttp->end_loc)
@@ -306,22 +306,22 @@ int main()
     int c = -1;
     while (c != 5)
     {
-        printf("\nMemory Allocation\n");
+        printf("\nMemory ALLOCation\n");
         printf("-----------------\n");
         printf("1) Enter parameters\n");
-        printf("2) Allocate memory for block\n");
-        printf("3) Deallocate memory for block\n");
+        printf("2) ALLOCate memory for block\n");
+        printf("3) DeALLOCate memory for block\n");
         printf("4) Defragment memory\n");
         printf("5) Quit program\n\n");
 
-        int_input("Enter selection: ", c);
+        INT_INPUT("Enter selection: ", c);
         switch (c)
         {
         case 1:
             entParms();
             break;
         case 2:
-            allocate();
+            ALLOCate();
             break;
         case 3:
             delloc();

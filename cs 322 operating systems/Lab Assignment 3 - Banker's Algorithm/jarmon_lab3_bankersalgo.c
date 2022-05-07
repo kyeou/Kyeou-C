@@ -4,17 +4,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define for_proc for (int p = 0; p < proc_amt; p++) 
-#define for_res for (int r = 0; r < res_amt; r++)
-#define int_input(msg, var) \
+#define FOR_PROC for (int p = 0; p < proc_amt; p++) 
+#define FOR_RES for (int r = 0; r < res_amt; r++)
+#define INT_INPUT(msg, var) \
     printf(msg);            \
     scanf("%d", &var)
-#define if_then(x, y) \
+#define IF_THEN(x, y) \
     if ((x))          \
     {                 \
         y;            \
     }
-#define alloc(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
 
 int res_amt,
     proc_amt, *seq, seqCount = 0;
@@ -28,7 +28,7 @@ struct process
     } * CV;
 } *PV = NULL;
 
-// PV[0].CV[0].current points to p0's r0 allocation
+// PV[0].CV[0].current points to p0's r0 ALLOCation
 
 struct resource
 {
@@ -42,10 +42,10 @@ typedef struct resource re;
 
 void VALUECHECK()
 {
-    for_proc
+    FOR_PROC
     {
         printf("%d: ", p);
-        for_res
+        FOR_RES
         {
             printf("%d\t", PV[p].CV[r].max_amt);
         }
@@ -65,7 +65,7 @@ void prt()
 {
     printf("\n        Units   Available\n");
     printf("------------------------\n");
-    for_res
+    FOR_RES
     {
         printf("r%d\t%d\t%d\n", r, RES[r].ramt, RES[r].aval);
     } // end prt res
@@ -84,7 +84,7 @@ void prt()
     // printf("  \t");
     for (int i = 0; i < 3; i++)
     {
-        for_res
+        FOR_RES
         {
             printf("r%d\t", r);
         }
@@ -99,22 +99,22 @@ void prt()
         }
     }
     printf("\n");
-    for_proc
+    FOR_PROC
     {
         printf("p%d\t", p);
-        for_res
+        FOR_RES
         {
             printf("%d\t", PV[p].CV[r].max_amt);
 
         } // end for res
         printf("\t");
-        for_res
+        FOR_RES
         {
             printf("%d\t", PV[p].CV[r].current);
 
         } // end for res
         printf("\t");
-        for_res
+        FOR_RES
         {
             printf("%d\t", PV[p].CV[r].potential);
 
@@ -127,47 +127,47 @@ void prt()
 
 void entParms()
 {
-    int_input("Enter selection: ", proc_amt);
-    int_input("Enter number of resources: ", res_amt);
-    PV = alloc(proc_amt, pv);
-    seq = alloc(proc_amt, int);
-    for_proc
+    INT_INPUT("Enter selection: ", proc_amt);
+    INT_INPUT("Enter number of resources: ", res_amt);
+    PV = ALLOC(proc_amt, pv);
+    seq = ALLOC(proc_amt, int);
+    FOR_PROC
     {
         PV[p].CV = (cv *)malloc(res_amt * sizeof(cv));
     }
-    RES = alloc(res_amt, re);
+    RES = ALLOC(res_amt, re);
     printf("Enter number of units for resources (r0 to r%d):", res_amt - 1);
 
-    // int_input1(("Enter number of units for resources (r0 to r%d):", res_amt), RES[0].ramt, RES[1].ramt, RES[2].ramt);
+    // INT_INPUT1(("Enter number of units for resources (r0 to r%d):", res_amt), RES[0].ramt, RES[1].ramt, RES[2].ramt);
     for (int i = 0; i < res_amt; i++)
     { // 1 0 2
         scanf("%d", &(RES[i].ramt));
     } // end for
 
-    for_res
+    FOR_RES
     {
         RES[r].aval = RES[r].ramt;
     }
-    for_proc
+    FOR_PROC
     {
         printf("Enter maximum number of units process p%d will request from each resource (r0 to r%d): ", p, res_amt - 1);
-        // int_input3("", PV[p].CV[0].max_amt, PV[p].CV[1].max_amt, PV[p].CV[2].max_amt);
+        // INT_INPUT3("", PV[p].CV[0].max_amt, PV[p].CV[1].max_amt, PV[p].CV[2].max_amt);
         for (int i = 0; i < res_amt; i++)
         {
             scanf("%d", &(PV[p].CV[i].max_amt));
         } // end for
     }
 
-    for_proc
+    FOR_PROC
     {
 
-        printf("Enter number of units of each resource (r0 to r%d) allocated to process p%d: ", res_amt - 1, p);
-        // int_input3("", PV[p].CV[0].current, PV[p].CV[1].current, PV[p].CV[2].current);
+        printf("Enter number of units of each resource (r0 to r%d) ALLOCated to process p%d: ", res_amt - 1, p);
+        // INT_INPUT3("", PV[p].CV[0].current, PV[p].CV[1].current, PV[p].CV[2].current);
         for (int i = 0; i < res_amt; i++)
         {
             scanf("%d", &(PV[p].CV[i].current));
         } // end for
-        for_res
+        FOR_RES
         {
 
             RES[r].aval -= PV[p].CV[r].current;
@@ -187,10 +187,10 @@ bool checkSeq()
 
     // bool deadlock = 0;
     int un = 0, se = 0;
-    for_proc
+    FOR_PROC
     {
-        if_then (PV[p].seq == 0 && PV[p].unsafe == 1, un++)
-        if_then (PV[p].seq, se++)
+        IF_THEN (PV[p].seq == 0 && PV[p].unsafe == 1, un++)
+        IF_THEN (PV[p].seq, se++)
        
     }
     // printf("DEADLOACK VALUES: un-%d se-%d: \n", un, se);
@@ -202,7 +202,7 @@ bool checkSeq()
     else if (un + se == proc_amt && un == 0)
     {
         printf("\nSafe sequence: ");
-        for_proc
+        FOR_PROC
         {
             printf("P%d ", seq[p]);
         }
@@ -212,7 +212,7 @@ bool checkSeq()
         return true;
     }
 
-    /* for_proc
+    /* FOR_PROC
      {
          if (!(PV[p].seq))
          {
@@ -224,9 +224,9 @@ bool checkSeq()
 
 bool csa(cv *C)
 {
-    for_res
+    FOR_RES
     {
-        if_then (C[r].potential > RES[r].aval, return false)
+        IF_THEN (C[r].potential > RES[r].aval, return false)
     }     // end for
     return true;
 } // end func
@@ -234,12 +234,12 @@ bool csa(cv *C)
 void printCheck(int pi)
 {
     printf("Checking: <");
-    for_res
+    FOR_RES
     {
         printf(" %d ", PV[pi].CV[r].potential);
     }
     printf("> <= <");
-    for_res
+    FOR_RES
     {
         printf(" %d ", RES[r].aval);
     }
@@ -249,7 +249,7 @@ void printCheck(int pi)
 void bankers()
 {
 
-    for_proc
+    FOR_PROC
     {
         PV[p].seq = 0;
         PV[p].unsafe = 0;
@@ -257,7 +257,7 @@ void bankers()
 
     while (checkSeq())
     {
-        for_proc
+        FOR_PROC
         {
             if (!(PV[p].seq))
             {
@@ -267,7 +267,7 @@ void bankers()
                     seq[seqCount] = p;
                     seqCount++;
                     printf("p%d safely sequenced\n", p);
-                    for_res
+                    FOR_RES
                     {
                         RES[r].aval += PV[p].CV[r].current;
                         PV[p].CV[r].current = 0;
@@ -276,7 +276,7 @@ void bankers()
                     }
                     PV[p].seq = 1;
 
-                    for_proc
+                    FOR_PROC
                     {
                         PV[p].unsafe = 0;
                     }
@@ -298,7 +298,7 @@ void bankers()
 void quit()
 {
 
-    for_proc
+    FOR_PROC
     {
         PV[p].CV = NULL;
         free(PV[p].CV);
@@ -320,7 +320,7 @@ int main()
         printf("1) Enter parameters\n");
         printf("2) Run the Banker's algorithm to determine a safe sequence\n");
         printf("3) Quit program and free memory\n\n");
-        int_input("Make a selection: ", c);
+        INT_INPUT("Make a selection: ", c);
         switch (c)
         {
         case 1:
