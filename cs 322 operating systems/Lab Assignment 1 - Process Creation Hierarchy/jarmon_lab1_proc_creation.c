@@ -48,9 +48,7 @@ void entParms()
     for (int m = 0; m < numOfProcs; m++)
     {
         PCB[m].field = m;
-        PCB[m].next = (pcb *)malloc(sizeof(pcb));
-        PCB[m].next = NULL;
-        PCB[m].child = (int *)malloc(sizeof(int));
+        PCB[m].next = NULL;  
         PCB[m].child = NULL;
     }
 }
