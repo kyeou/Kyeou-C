@@ -12,6 +12,13 @@
 #define abs_val(x) (((x) < 0) ? ((x) * -1) : (x))
 #define for_cyl for (int i = 1; i < size; i++)
 
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }
+#define alloc(size, type) (type*)malloc(size*sizeof(type))
+
 int *seq, *traversal, size, *seq_low, *seq_high, lc = 0, hc = 0, *seq_low_copy;
 bool *seq_bool, direction;
 
@@ -19,10 +26,7 @@ bool all_seq()
 {
     for_cyl
     {
-        if (seq_bool[i] == false)
-        {
-            return false;
-        }
+        if_then (seq_bool[i] == false, return false)
     }
     return true;
 }
@@ -72,19 +76,18 @@ void sort()
 void entParms()
 {
 
-    seq_low = (int *)malloc(sizeof(int));
-    seq_high = (int *)malloc(sizeof(int));
+    seq_low = alloc(1, int);
+    seq_high = alloc(1, int);
     int_input("Enter size of sequence: ", size);
-    seq = (int *)malloc(size * sizeof(int));
-    traversal = (int *)malloc(size * sizeof(int));
-    seq_bool = (bool *)malloc(size * sizeof(bool));
+    seq = alloc(size, int);
+    traversal = alloc(size, int);
+    seq_bool = alloc(size, bool);
     int_input("Enter starting track: ", seq[0]);
 
     printf("Enter sequence of tracks to seek: ");
     for_cyl
     {
         scanf("%d", &(seq[i]));
-
     } // end for
 
     for_cyl

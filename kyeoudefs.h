@@ -38,7 +38,7 @@
 
 // C
 
-#define for (amount) for (int b = 0; b < amount; b++)
+#define forL (amount) for (int b = 0; b < amount; b++)
 #define for_each_cond(x, y, amount)  \
     for (int b = 0; b < amount; b++) \
     {                                \
@@ -53,3 +53,9 @@
     scanf("%d", &var)
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define min(a, b) (((a) < (b)) ? (a) : (b))
+
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }

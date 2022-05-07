@@ -9,6 +9,12 @@
 #define int_input(msg, var) \
     printf(msg);            \
     scanf("%d", &var)
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }
+#define alloc(size, type) (type*)malloc(size*sizeof(type))
 
 int res_amt,
     proc_amt, *seq, seqCount = 0;
@@ -123,25 +129,20 @@ void entParms()
 {
     int_input("Enter selection: ", proc_amt);
     int_input("Enter number of resources: ", res_amt);
-    PV = (pv *)malloc(proc_amt * sizeof(pv));
-    seq = (int *)malloc(proc_amt * sizeof(int));
+    PV = alloc(proc_amt, pv);
+    seq = alloc(proc_amt, int);
     for_proc
     {
         PV[p].CV = (cv *)malloc(res_amt * sizeof(cv));
     }
-
-    RES = (re *)malloc(res_amt * sizeof(re));
+    RES = alloc(res_amt, re);
     printf("Enter number of units for resources (r0 to r%d):", res_amt - 1);
 
     // int_input1(("Enter number of units for resources (r0 to r%d):", res_amt), RES[0].ramt, RES[1].ramt, RES[2].ramt);
     for (int i = 0; i < res_amt; i++)
     { // 1 0 2
         scanf("%d", &(RES[i].ramt));
-
     } // end for
-
-
-
 
     for_res
     {
@@ -154,7 +155,6 @@ void entParms()
         for (int i = 0; i < res_amt; i++)
         {
             scanf("%d", &(PV[p].CV[i].max_amt));
-
         } // end for
     }
 
@@ -189,14 +189,9 @@ bool checkSeq()
     int un = 0, se = 0;
     for_proc
     {
-        if (PV[p].seq == 0 && PV[p].unsafe == 1)
-        {
-            un++;
-        }
-        if (PV[p].seq == 1)
-        {
-            se++;
-        }
+        if_then (PV[p].seq == 0 && PV[p].unsafe == 1, un++)
+        if_then (PV[p].seq, se++)
+       
     }
     // printf("DEADLOACK VALUES: un-%d se-%d: \n", un, se);
     if (un + se == proc_amt && un >= 1)
@@ -231,10 +226,7 @@ bool csa(cv *C)
 {
     for_res
     {
-        if (C[r].potential > RES[r].aval)
-        {
-            return false;
-        } // end if
+        if_then (C[r].potential > RES[r].aval, return false)
     }     // end for
     return true;
 } // end func
@@ -354,7 +346,7 @@ input:
 1
 5
 3
--1 5 7
+10 5 7
 7 5 3
 3 2 2
 9 0 2

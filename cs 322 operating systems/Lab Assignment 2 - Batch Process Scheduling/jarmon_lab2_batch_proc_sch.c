@@ -11,6 +11,12 @@
     scanf("%d", &var)
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define min(a, b) (((a) < (b)) ? (a) : (b))
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }
+#define alloc(size, type) (type*)malloc(size*sizeof(type))
 
 int numProcs, cycles = 0;
 
@@ -52,15 +58,13 @@ void entParms()
     // printf("Enter total number of processes: ");
     // scanf("%d", &numProcs);
     int_input("Enter total number of processes: ", numProcs);
-    PB = (pb *)malloc(numProcs * sizeof(pb));
+    PB = alloc(numProcs,pb);
     // printf("%d\n", sizeof(PB));
     for (int b = 0; b < numProcs; b++)
     {
         int z;
-        printf("Enter process id: ");
-        scanf("%d", &z);
-        // int_input( int z; "Enter process id: ", z)
-        PB[b].id = (int *)malloc(sizeof(int));
+        int_input("Enter process id: ", z);
+        PB[b].id = alloc(1, int);
         *(PB[b].id) = z;
         // printf("curr id %d\n", *(PB[b].id));
         printf("Enter arrival cycle for process P[%d]: ", *(PB[b].id));
@@ -84,14 +88,8 @@ bool checkSchedule()
     int c = 0;
     while (true)
     {
-        if (c == numProcs)
-        {
-            return false;
-        }
-        if (!(PB[c].done))
-        {
-            return true;
-        }
+        if_then (c == numProcs, return false)
+        if_then (!(PB[c].done), return true)
         c++; //;)
     }        // end while
 } // end func
@@ -102,16 +100,13 @@ bool checkSchedule()
 pb *currNS()
 {
 
-    pb *earliest;
-    earliest = (pb *)malloc(sizeof(pb));
+    pb *earliest = alloc(1, pb);
     earliest->avl = INT_MAX;
 
     for_proc
     {
-        if (PB[b].avl < earliest->avl && !(PB[b].done))
-        {
-            earliest = &PB[b];
-        }
+        if_then (PB[b].avl < earliest->avl && !(PB[b].done), earliest = &PB[b])
+       
     } // end for
     return earliest;
 } // end of process
@@ -146,16 +141,12 @@ void fifo()
 
 pb *currSJ()
 {
-    pb *shortest;
-    shortest = (pb *)malloc(sizeof(pb));
+    pb *shortest = alloc(1, pb);
     shortest->total_cpu = INT_MAX;
 
     for_proc
     {
-        if (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done))
-        {
-            shortest = &PB[b];
-        }
+        if_then (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
     } // end for
     return shortest;
 } // end of process
@@ -185,16 +176,13 @@ void sjf()
 
 pb *currSRT()
 {
-    pb *shortest;
-    shortest = (pb *)malloc(sizeof(pb));
+    pb *shortest = alloc(1, pb);
     shortest->tot_rem = INT_MAX;
 
     for_proc
     {
-        if (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done))
-        {
-            shortest = &PB[b];
-        }
+        if_then (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done),  shortest = &PB[b])
+       
     } // end for
     return shortest;
 } // end currSRT
@@ -284,6 +272,7 @@ int main()
 }
 
 /*
+
 1
 3
 1

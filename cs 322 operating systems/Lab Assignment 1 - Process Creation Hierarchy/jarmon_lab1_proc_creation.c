@@ -3,7 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }
+#define alloc(size, type) (type*)malloc(size*sizeof(type))
 int numOfProcs, aoc;
 
 struct process
@@ -43,7 +48,7 @@ void entParms()
 {
     printf("Enter maximum number of processes: ");
     scanf("%d", &numOfProcs);
-    PCB = (pcb *)malloc(numOfProcs * sizeof(pcb));
+    PCB = alloc(numOfProcs , pcb);
     aoc = 0;
     for (int m = 0; m < numOfProcs; m++)
     {
@@ -86,38 +91,21 @@ void create()
 
 void ridNexts(pcb **next)
 {
-    if (!(*next))
+    if_then(!(*next), return ) else
     {
-        return;
-    }
-    else
-    {
-        if ((**next).child)
-        {
-            destroy(&((**next).child));
-        }
-
-        if ((**next).next)
-        {
-            ridNexts(&((**next).next));
-        }
-        *next = NULL;
+        if_then((**next).child, destroy(&((**next).child)))
+            if_then((**next).next, ridNexts(&((**next).next)))
+                *next = NULL;
     }
 }
 
 void destroy(int **child)
 {
-    if (!(*child))
+    if_then(!(*child), return ) else
     {
-        return;
-    }
-    else
-    {
-        if (PCB[**child].next)
-        {
-            ridNexts(&(PCB[**child].next));
-        }
-        PCB[**child].parent = -1;
+        if_then(PCB[**child].next, ridNexts(&(PCB[**child].next)))
+            PCB[**child]
+                .parent = -1;
         *child = NULL;
     }
 }
@@ -129,10 +117,7 @@ void destroyer()
         int par;
         printf("Enter the index of the process whose descendants are to be destroyed: ");
         scanf("%d", &par);
-        if (PCB[par].child)
-        {
-            destroy(&(PCB[par].child));
-        }
+        if_then(PCB[par].child, destroy(&(PCB[par].child)))
     }
     printProcs();
 }
@@ -148,14 +133,9 @@ void printCandN2()
 
 void quit()
 {
-    if (PCB)
-    {
-        if (PCB[0].child)
-        {
-            destroy(&(PCB[0].child));
-        }
-    }
-    PCB = NULL;
+    if_then(PCB, if_then(PCB[0].child, destroy(&(PCB[0].child))))
+
+        PCB = NULL;
     free(PCB);
     printf("Quitting program...");
 }

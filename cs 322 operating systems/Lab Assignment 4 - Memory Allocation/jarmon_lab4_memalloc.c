@@ -15,7 +15,12 @@
     printf(msg);            \
     scanf("%d", &(var))
 
-//#define bl_alloc ((bl *)malloc(sizeof(bl)))
+#define if_then(x, y) \
+    if ((x))          \
+    {                 \
+        y;            \
+    }
+#define alloc(size, type) (type*)malloc(size*sizeof(type))
 
 int pm_size, amt = 0;
 bool fit_bool;
@@ -33,7 +38,7 @@ bl *ttp;
 
 bl *getHead()
 {
-    bl *q = (bl *)malloc(sizeof(bl));
+    bl *q = alloc(1,bl);
     int a = INT_MAX;
     for (int i = 0; i < amt; i++)
     {
@@ -53,11 +58,7 @@ bool checkID(int i)
 {
     while_bl
     {
-        if (i == ttp->id)
-        {
-            return true;
-            break;
-        }
+        if_then (i == ttp->id, return true)
         ttp = ttp->next;
     }
     return false;
@@ -65,7 +66,7 @@ bool checkID(int i)
 // these functions take a new block and its size, and retuns the block it can fit after
 bl *first_fit(bl *btf, int size)
 {
-    bl *ret = ((bl *)malloc(sizeof(bl)));
+    bl *ret = alloc(1, bl);
      //ret->id = INT_MAX;
     int ts = INT_MAX;
 
@@ -78,7 +79,7 @@ bl *first_fit(bl *btf, int size)
     }
     printf("\n");
 */
-bool q = false,  w = false;
+    bool q = false,  w = false;
     while_bl
     {
 
@@ -163,13 +164,13 @@ void prt()
 
 void entParms()
 {
-    PHY_MEM = (bl *)malloc(sizeof(bl));
-    bl *ttp = ((bl *)malloc(sizeof(bl)));
+    PHY_MEM = alloc(1, bl);
+    bl *ttp = alloc(1, bl);
     int_input("Enter size of physical memory: ", pm_size);
     int_input("Enter hole-fitting algorithm (0=first fit, 1=best_fit): ", fit_bool);
 }
 
-void alloc()
+void allocate()
 {
 
     amt++;
@@ -224,10 +225,7 @@ void alloc()
                         printf("\n");
                         */
         }
-        else if (!(checkID(temp->id)))
-        {
-            printf("Block does not fit\n");
-        }
+        else if_then (!(checkID(temp->id)), printf("Block does not fit\n"))
     } // end else
 
     prt();
@@ -236,29 +234,19 @@ void alloc()
 void delloc()
 {
     int i;
-    bl *d, *h;
-    d = ((bl *)malloc(sizeof(bl)));
-    h = ((bl *)malloc(sizeof(bl)));
+    bl *d = alloc(1, bl), *h = alloc(1, bl);
 
     int_input("Enter block id: ", i);
 
     while_bl
     {
-        if (ttp->id == i)
-        {
-            d = ttp;
-            break;
-        }
+        if_then (ttp->id == i, d = ttp; break)
         ttp = ttp->next;
     }
 
     while_bl
     {
-        if (ttp->next == d)
-        {
-            h = ttp;
-            break;
-        }
+        if_then (ttp->next == d, h = ttp; break)
         ttp = ttp->next;
     }
 
@@ -284,10 +272,7 @@ void defrag()
     while_bl
     {
         // printf("CURR ID --> %d\n", ttp->id);
-        if (ttp->next == NULL)
-        {
-            break;
-        }
+        if_then (!(ttp->next), break)
         int nextSize = ttp->next->size;
 
         if (ttp->next->start_loc != ttp->end_loc)
@@ -336,7 +321,7 @@ int main()
             entParms();
             break;
         case 2:
-            alloc();
+            allocate();
             break;
         case 3:
             delloc();
