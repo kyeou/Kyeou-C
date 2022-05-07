@@ -48,7 +48,7 @@ void entParms()
     for (int m = 0; m < numOfProcs; m++)
     {
         PCB[m].field = m;
-        PCB[m].next = NULL;  
+        PCB[m].next = NULL;
         PCB[m].child = NULL;
     }
 }
@@ -66,7 +66,7 @@ void create()
         *(PCB[par].child) = newC;
         PCB[newC].parent = par;
     }
-    else if (PCB[par].child != NULL && (PCB[*(PCB[par].child)].next) == NULL)
+    else if (PCB[par].child && (!(PCB[*(PCB[par].child)].next)))
     {
         PCB[*(PCB[par].child)].next = &(PCB[newC]);
         PCB[newC].parent = par;
@@ -74,7 +74,7 @@ void create()
     else
     {
         newLink = PCB[*(PCB[par].child)].next->field;
-        while (PCB[newLink].next != NULL)
+        while (PCB[newLink].next)
         {
             newLink = PCB[newLink].next->field;
         }
