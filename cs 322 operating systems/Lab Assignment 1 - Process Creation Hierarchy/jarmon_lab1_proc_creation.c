@@ -155,7 +155,6 @@ void quit()
             destroy(&(PCB[0].child));
         }
     }
-    realloc(PCB, 0);
     PCB = NULL;
     free(PCB);
     printf("Quitting program...");
