@@ -36,7 +36,7 @@ void prt()
             printf("%d\t", PB[b].avl);
             printf("%d\t", PB[b].total_cpu);
             // printf("%d\t %d\t %d\t", *(PB[b].id), PB[b].avl, PB[b].total_cpu);
-            if (PB[b].done != 0)
+            if (PB[b].done)
             {
                 printf("%d\t", PB[b].start_t);
                 printf("%d\t", PB[b].end_t);
