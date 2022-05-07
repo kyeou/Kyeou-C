@@ -18,7 +18,7 @@ void printChildren(pcb p)
 {
     int ttp = *(p.child);
     printf("PCB[%d]\t", ttp);
-    while (PCB[ttp].next != NULL)
+    while (PCB[ttp].next)
     {
         ttp = PCB[ttp].next->field;
         printf("PCB[%d]\t", ttp);
@@ -30,7 +30,7 @@ void printProcs()
 {
     for (int i = 0; i < numOfProcs; i++)
     {
-        if (PCB[i].child != NULL)
+        if (PCB[i].child)
         {
             printf("PCB[%d] is the parent of: ", i);
             printChildren(PCB[i]);
@@ -62,7 +62,7 @@ void create()
     scanf("%d", &par);
     aoc++;
     newC = aoc;
-    if (PCB[par].child == NULL)
+    if (!(PCB[par].child))
     {
         PCB[par].child = (int *)malloc(sizeof(int));
         *(PCB[par].child) = newC;
@@ -88,18 +88,18 @@ void create()
 
 void ridNexts(pcb **next)
 {
-    if (*next == NULL)
+    if (!(*next))
     {
         return;
     }
     else
     {
-        if ((**next).child != NULL)
+        if ((**next).child)
         {
             destroy(&((**next).child));
         }
 
-        if ((**next).next != NULL)
+        if ((**next).next)
         {
             ridNexts(&((**next).next));
         }
@@ -109,13 +109,13 @@ void ridNexts(pcb **next)
 
 void destroy(int **child)
 {
-    if (*child == NULL)
+    if (!(*child))
     {
         return;
     }
     else
     {
-        if (PCB[**child].next != NULL)
+        if (PCB[**child].next)
         {
             ridNexts(&(PCB[**child].next));
         }
@@ -126,12 +126,12 @@ void destroy(int **child)
 
 void destroyer()
 {
-    if (PCB != NULL)
+    if (PCB)
     {
         int par;
         printf("Enter the index of the process whose descendants are to be destroyed: ");
         scanf("%d", &par);
-        if (PCB[par].child != NULL)
+        if (PCB[par].child)
         {
             destroy(&(PCB[par].child));
         }
@@ -150,9 +150,9 @@ void printCandN2()
 
 void quit()
 {
-    if (PCB != NULL)
+    if (PCB)
     {
-        if (PCB[0].child != NULL)
+        if (PCB[0].child)
         {
             destroy(&(PCB[0].child));
         }
@@ -160,6 +160,7 @@ void quit()
     realloc(PCB, 0);
     PCB = NULL;
     free(PCB);
+    printf("Quitting program...");
 }
 
 int main()
@@ -196,3 +197,23 @@ int main()
 
     return 1; /* indicates success */
 }
+
+/*
+
+1
+5
+2
+0
+2
+0
+2
+2
+2
+0
+3
+0
+4
+
+
+
+*/
