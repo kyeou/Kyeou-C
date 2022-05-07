@@ -17,7 +17,7 @@
     {                 \
         y;            \
     }
-#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type *)malloc(size * sizeof(type))
 
 int *seq, *traversal, size, *seq_low, *seq_high, lc = 0, hc = 0, *seq_low_copy;
 bool *seq_bool, direction;
@@ -26,7 +26,7 @@ bool all_seq()
 {
     FOR_CYL
     {
-        IF_THEN (seq_bool[i] == false, return false)
+        IF_THEN(seq_bool[i] == false, return false)
     }
     return true;
 }

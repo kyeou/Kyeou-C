@@ -8,7 +8,7 @@
     {                 \
         y;            \
     }
-#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type *)malloc(size * sizeof(type))
 int numOfProcs, aoc;
 
 struct process
@@ -48,7 +48,7 @@ void entParms()
 {
     printf("Enter maximum number of processes: ");
     scanf("%d", &numOfProcs);
-    PCB = ALLOC(numOfProcs , pcb);
+    PCB = ALLOC(numOfProcs, pcb);
     aoc = 0;
     for (int m = 0; m < numOfProcs; m++)
     {
@@ -91,21 +91,23 @@ void create()
 
 void ridNexts(pcb **next)
 {
-    IF_THEN(!(*next), return ) else
+    IF_THEN(!(*next), return )
+    else
     {
         IF_THEN((**next).child, destroy(&((**next).child)))
-            IF_THEN((**next).next, ridNexts(&((**next).next)))
-                *next = NULL;
+        IF_THEN((**next).next, ridNexts(&((**next).next)))
+        *next = NULL;
     }
 }
 
 void destroy(int **child)
 {
-    IF_THEN(!(*child), return ) else
+    IF_THEN(!(*child), return )
+    else
     {
         IF_THEN(PCB[**child].next, ridNexts(&(PCB[**child].next)))
-            PCB[**child]
-                .parent = -1;
+        PCB[**child]
+            .parent = -1;
         *child = NULL;
     }
 }
@@ -135,7 +137,7 @@ void quit()
 {
     IF_THEN(PCB, IF_THEN(PCB[0].child, destroy(&(PCB[0].child))))
 
-        PCB = NULL;
+    PCB = NULL;
     free(PCB);
     printf("Quitting program...");
 }

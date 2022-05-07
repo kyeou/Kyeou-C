@@ -20,7 +20,7 @@
     {                 \
         y;            \
     }
-#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type *)malloc(size * sizeof(type))
 
 int pm_size, amt = 0;
 bool fit_bool;
@@ -38,11 +38,11 @@ bl *ttp;
 
 bl *getHead()
 {
-    bl *q = ALLOC(1,bl);
+    bl *q = ALLOC(1, bl);
     int a = INT_MAX;
     for (int i = 0; i < amt; i++)
     {
-        
+
         if (PHY_MEM[i].start_loc < a)
         {
             a = PHY_MEM[i].start_loc;
@@ -58,7 +58,7 @@ bool checkID(int i)
 {
     WHILE_BL
     {
-        IF_THEN (i == ttp->id, return true)
+        IF_THEN(i == ttp->id, return true)
         ttp = ttp->next;
     }
     return false;
@@ -67,7 +67,7 @@ bool checkID(int i)
 bl *first_fit(bl *btf, int size)
 {
     bl *ret = ALLOC(1, bl);
-     //ret->id = INT_MAX;
+    // ret->id = INT_MAX;
     int ts = INT_MAX;
 
     /*printf("IDs (Last number should be 1)-->> ");
@@ -79,7 +79,7 @@ bl *first_fit(bl *btf, int size)
     }
     printf("\n");
 */
-    bool q = false,  w = false;
+    bool q = false, w = false;
     WHILE_BL
     {
 
@@ -124,12 +124,12 @@ bl *best_fit(bl *btf, int size)
         printf("\n");
     */
     // printf("HEAD CHECK BF (Should be 0) --> %d\n", head->id);
-   // printf("HC JESUS CHRIST --> %d %d %d\n", getHead()->id, getHead()->start_loc, getHead()->end_loc);
+    // printf("HC JESUS CHRIST --> %d %d %d\n", getHead()->id, getHead()->start_loc, getHead()->end_loc);
     WHILE_BL
     {
-        //printf("STILL IN BEST FIT WHILE --> %d %d %d\n", ttp->id, ttp->start_loc, ttp->end_loc);
-        // printf("HEAD CHECK (Should be 0) --> %d\n", head->id);
-        //  printf("IS QW->NEXT NULL (1=Yes, 0=No) %zu\n", ttp->next == 0);
+        // printf("STILL IN BEST FIT WHILE --> %d %d %d\n", ttp->id, ttp->start_loc, ttp->end_loc);
+        //  printf("HEAD CHECK (Should be 0) --> %d\n", head->id);
+        //   printf("IS QW->NEXT NULL (1=Yes, 0=No) %zu\n", ttp->next == 0);
         if (ttp->next == 0)
         {
             // printf("TAIL CHECK -- %d\n", pm_size - ttp->end_loc);
@@ -179,11 +179,11 @@ void ALLOCate()
     INT_INPUT("Enter block size: ", (PHY_MEM[amt - 1]).size);
     if (amt == 1)
     {
-      //  printf(" SIZE CHECK-->> %d\n", (PHY_MEM[amt - 1]).size);
+        //  printf(" SIZE CHECK-->> %d\n", (PHY_MEM[amt - 1]).size);
         // head = &(PHY_MEM[amt - 1]);
         PHY_MEM[amt - 1].start_loc = 0;
         PHY_MEM[amt - 1].end_loc = PHY_MEM[amt - 1].size + PHY_MEM[amt - 1].start_loc;
-      //  printf("FIRST BLOCK SIZE -->> %d == %d\n", (PHY_MEM[amt - 1]).size + PHY_MEM[amt - 1].start_loc, PHY_MEM[amt - 1].end_loc);
+        //  printf("FIRST BLOCK SIZE -->> %d == %d\n", (PHY_MEM[amt - 1]).size + PHY_MEM[amt - 1].start_loc, PHY_MEM[amt - 1].end_loc);
         PHY_MEM[amt - 1].next = 0;
         // head = &(PHY_MEM[amt - 1]);
         // pm_size -= s;
@@ -225,7 +225,8 @@ void ALLOCate()
                         printf("\n");
                         */
         }
-        else IF_THEN (!(checkID(temp->id)), printf("Block does not fit\n"))
+        else
+            IF_THEN(!(checkID(temp->id)), printf("Block does not fit\n"))
     } // end else
 
     prt();
@@ -240,13 +241,13 @@ void delloc()
 
     WHILE_BL
     {
-        IF_THEN (ttp->id == i, d = ttp; break)
+        IF_THEN(ttp->id == i, d = ttp; break)
         ttp = ttp->next;
     }
 
     WHILE_BL
     {
-        IF_THEN (ttp->next == d, h = ttp; break)
+        IF_THEN(ttp->next == d, h = ttp; break)
         ttp = ttp->next;
     }
 
@@ -272,7 +273,7 @@ void defrag()
     WHILE_BL
     {
         // printf("CURR ID --> %d\n", ttp->id);
-        IF_THEN (!(ttp->next), break)
+        IF_THEN(!(ttp->next), break)
         int nextSize = ttp->next->size;
 
         if (ttp->next->start_loc != ttp->end_loc)

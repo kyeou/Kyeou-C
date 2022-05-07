@@ -16,7 +16,7 @@
     {                 \
         y;            \
     }
-#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type *)malloc(size * sizeof(type))
 
 int numProcs, cycles = 0;
 
@@ -58,7 +58,7 @@ void entParms()
     // printf("Enter total number of processes: ");
     // scanf("%d", &numProcs);
     INT_INPUT("Enter total number of processes: ", numProcs);
-    PB = ALLOC(numProcs,pb);
+    PB = ALLOC(numProcs, pb);
     // printf("%d\n", sizeof(PB));
     for (int b = 0; b < numProcs; b++)
     {
@@ -88,8 +88,8 @@ bool checkSchedule()
     int c = 0;
     while (true)
     {
-        IF_THEN (c == numProcs, return false)
-        IF_THEN (!(PB[c].done), return true)
+        IF_THEN(c == numProcs, return false)
+        IF_THEN(!(PB[c].done), return true)
         c++; //;)
     }        // end while
 } // end func
@@ -105,8 +105,8 @@ pb *currNS()
 
     FOR_PROC
     {
-        IF_THEN (PB[b].avl < earliest->avl && !(PB[b].done), earliest = &PB[b])
-       
+        IF_THEN(PB[b].avl < earliest->avl && !(PB[b].done), earliest = &PB[b])
+
     } // end for
     return earliest;
 } // end of process
@@ -115,7 +115,7 @@ void fifo()
 {
     // point of start for any process is the current cycle time
     // take the process with earliest arrival time that has not been done
-    //      take the total cycle time of that process, ---> arrival time + cycle time of process = end time\
+    //       take the total cycle time of that process, ---> arrival time + cycle time of process = end time\
     //set done flag of current process to 1
     // cycle time += end time
     // if not at PB[numProcs], PB[next process].start = current time
@@ -146,7 +146,7 @@ pb *currSJ()
 
     FOR_PROC
     {
-        IF_THEN (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
+        IF_THEN(PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
     } // end for
     return shortest;
 } // end of process
@@ -181,8 +181,8 @@ pb *currSRT()
 
     FOR_PROC
     {
-        IF_THEN (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done),  shortest = &PB[b])
-       
+        IF_THEN(PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done), shortest = &PB[b])
+
     } // end for
     return shortest;
 } // end currSRT

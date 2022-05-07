@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define FOR_PROC for (int p = 0; p < proc_amt; p++) 
+#define FOR_PROC for (int p = 0; p < proc_amt; p++)
 #define FOR_RES for (int r = 0; r < res_amt; r++)
 #define INT_INPUT(msg, var) \
     printf(msg);            \
@@ -14,7 +14,7 @@
     {                 \
         y;            \
     }
-#define ALLOC(size, type) (type*)malloc(size*sizeof(type))
+#define ALLOC(size, type) (type *)malloc(size * sizeof(type))
 
 int res_amt,
     proc_amt, *seq, seqCount = 0;
@@ -189,9 +189,8 @@ bool checkSeq()
     int un = 0, se = 0;
     FOR_PROC
     {
-        IF_THEN (PV[p].seq == 0 && PV[p].unsafe == 1, un++)
-        IF_THEN (PV[p].seq, se++)
-       
+        IF_THEN(PV[p].seq == 0 && PV[p].unsafe == 1, un++)
+        IF_THEN(PV[p].seq, se++)
     }
     // printf("DEADLOACK VALUES: un-%d se-%d: \n", un, se);
     if (un + se == proc_amt && un >= 1)
@@ -208,7 +207,9 @@ bool checkSeq()
         }
         printf("\n");
         return false;
-    } else {
+    }
+    else
+    {
         return true;
     }
 
@@ -219,15 +220,15 @@ bool checkSeq()
              return true;
          }
      } // end proc */
-    //return true;
+    // return true;
 } // end func
 
 bool csa(cv *C)
 {
     FOR_RES
     {
-        IF_THEN (C[r].potential > RES[r].aval, return false)
-    }     // end for
+        IF_THEN(C[r].potential > RES[r].aval, return false)
+    } // end for
     return true;
 } // end func
 
@@ -292,7 +293,7 @@ void bankers()
     } // end while
 
     //   printf("Deadlock reached!\n");
- //prt();
+    // prt();
 } // end bankers
 
 void quit()
