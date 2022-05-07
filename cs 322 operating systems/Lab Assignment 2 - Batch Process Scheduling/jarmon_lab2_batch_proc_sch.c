@@ -88,7 +88,7 @@ bool checkSchedule()
         {
             return false;
         }
-        if (PB[c].done == 0)
+        if (!(PB[c].done))
         {
             return true;
         }
