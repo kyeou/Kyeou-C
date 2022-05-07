@@ -6,14 +6,6 @@
 #include <limits.h>
 
 #define for_proc for (int b = 0; b < numProcs; b++)
-#define for_each_cond(x, y)            \
-    for (int b = 0; b < numProcs; b++) \
-    {                                  \
-        if (x)                         \
-        {                              \
-            y;                         \
-        }                              \
-    }
 #define int_input(msg, var) \
     printf(msg);            \
     scanf("%d", &var)
@@ -38,12 +30,12 @@ void prt()
     printf("--------------------------------------------------\n");
     for_proc
     {
-        if (PB[b].id != NULL)
+        if (PB[b].id)
         {
             printf("%d\t", *(PB[b].id));
             printf("%d\t", PB[b].avl);
             printf("%d\t", PB[b].total_cpu);
-            //printf("%d\t %d\t %d\t", *(PB[b].id), PB[b].avl, PB[b].total_cpu);
+            // printf("%d\t %d\t %d\t", *(PB[b].id), PB[b].avl, PB[b].total_cpu);
             if (PB[b].done != 0)
             {
                 printf("%d\t", PB[b].start_t);
@@ -100,8 +92,8 @@ bool checkSchedule()
         {
             return true;
         }
-        c++;
-    } // end while
+        c++; //;)
+    }        // end while
 } // end func
 
 //------------------------------------------------------------------
@@ -116,7 +108,7 @@ pb *currNS()
 
     for_proc
     {
-        if (PB[b].avl < earliest->avl && PB[b].done == 0)
+        if (PB[b].avl < earliest->avl && !(PB[b].done))
         {
             earliest = &PB[b];
         }
@@ -128,7 +120,7 @@ void fifo()
 {
     // point of start for any process is the current cycle time
     // take the process with earliest arrival time that has not been done
-    //     take the total cycle time of that process, ---> arrival time + cycle time of process = end time\
+    //      take the total cycle time of that process, ---> arrival time + cycle time of process = end time\
     //set done flag of current process to 1
     // cycle time += end time
     // if not at PB[numProcs], PB[next process].start = current time
@@ -158,10 +150,9 @@ pb *currSJ()
     shortest = (pb *)malloc(sizeof(pb));
     shortest->total_cpu = INT_MAX;
 
-   
     for_proc
     {
-        if (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && PB[b].done == 0)
+        if (PB[b].total_cpu < shortest->total_cpu && PB[b].avl <= cycles && !(PB[b].done))
         {
             shortest = &PB[b];
         }
@@ -200,15 +191,13 @@ pb *currSRT()
 
     for_proc
     {
-        if (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && PB[b].done == 0)
+        if (PB[b].tot_rem < shortest->tot_rem && PB[b].avl <= cycles && !(PB[b].done))
         {
             shortest = &PB[b];
         }
     } // end for
     return shortest;
 } // end currSRT
-
-
 
 void srt()
 {
@@ -223,7 +212,7 @@ void srt()
     while (checkSchedule())
     {
         pb *cSRT = currSRT();
-        if (cSRT->start_b == 0)
+        if (!(cSRT->start_b))
         {
             cSRT->start_t = cycles;
             cSRT->start_b = 1;
@@ -232,7 +221,7 @@ void srt()
         cSRT->tot_rem--;
         cycles++;
 
-        if (cSRT->tot_rem == 0)
+        if (!(cSRT->tot_rem))
         {
             cSRT->end_t = cycles;
             cSRT->ta_time = cSRT->end_t - cSRT->avl;
@@ -252,6 +241,7 @@ void quit()
         PB[b].id = NULL;
         free(PB[b].id);
     }
+    PB = NULL;
     free(PB);
 }
 
@@ -267,8 +257,7 @@ int main()
         printf("3) Schedule processes with SJF algorithm\n");
         printf("4) Schedule processes with SRT algorithm\n");
         printf("5) Quit and free memory\n\n");
-        printf("Enter selection: ");
-        scanf("%d", &c);
+        int_input("Enter selection: ", c);
         switch (c)
         {
         case 1:
