@@ -1,3 +1,0 @@
-C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/cmake_kyeou/out/build/x64-Debug/CMakeFiles/cmake_kyeou.dir
-C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/cmake_kyeou/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/kyeou/Dropbox/PC (2)/Desktop/Stuff On Github/Kyeou-C/cmake_kyeou/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

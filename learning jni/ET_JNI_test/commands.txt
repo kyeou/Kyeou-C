@@ -1,5 +1,0 @@
-javac -h . HelloWorldJNI.java
-
-g++ -c -I%JAVA_HOME%\include -I%JAVA_HOME%\include\win32 HelloWorldJNI.cpp -o HelloWorldJNI.o
-
-g++ -shared -o native.dll HelloWorldJNI.o -W
