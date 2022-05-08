@@ -96,3 +96,51 @@ records the number of units of resource j that process i has actually been alloc
 o Need array: an nxm array, where m is the number of resources and n is the number of
 processes, and each entry need[i][j] contains an integer that records the number of
 units of resource j that process i may need in the future.
+
+Lab 4:
+Objective:
+To simulate memory allocation with hole-fitting algorithms (First-fit, Best-fit) and
+implement deallocation and defragmentation of memory blocks.
+Specification:
+The program simulates memory allocation with a chosen hole-fitting algorithm (First-fit,
+Best-fit) and implements deallocation and defragmentation. A menu controls the
+operations, and each choice calls the appropriate procedure, where the choices are:
+1) Enter parameters
+2) Allocate memory for a block
+3) Deallocate memory for a block
+4) Defragment memory
+5) Quit program and free memory
+Assignment:
+• The size of physical memory is represented by an integer pm_size.
+• The allocated blocks are contained within a linked list, where each allocated block is
+a structure containing: (1) the id, (2) the starting address of the block, (3) the ending
+address of the block, and (4) a link to the next allocated block.
+• Each allocation request prompts for: (1) the id and (2) the size of the new block. If the
+id is a duplicate and/or the remaining physical memory is not enough to fit the
+request, the request is rejected, and an appropriate message is displayed.
+• Each deallocation request prompts for the id. If the id is invalid, the request is
+rejected.
+• Defragmentation compacts the blocks to be contiguous, and coalesces the holes into
+one hole at the far--right end (highest memory addresses) of physical memory.
+
+Lab 5:
+Objective:
+• To compare the performance of disk scheduling algorithms:
+First-in-first-out (FIFO), Shortest-seek-time-first (SSTF), Scan, and C-Scan.
+Specification:
+• The program compares the disk scheduling algorithms: First-in-first-out (FIFO), Shortest-
+seek-time-first (SSTF), Scan, and C-Scan in terms of traversing a set of tracks input by
+the user, and calculates the total distance of the tracks traversed.
+• A menu controls the operations, and each choice calls the appropriate procedure, where
+the choices are:
+1) Enter parameters
+2) Calculate distance to traverse tracks using FIFO
+3) Calculate distance to traverse tracks using SSTF
+4) Calculate distance to traverse tracks using Scan
+5) Calculate distance to traverse tracks using C-Scan
+6) Quit program and free memory
+Assignment:
+• For a sequence of size m, a disk scheduling algorithm accepts a starting track followed by
+a sequence of m-1 integers, where each index value t is a request to seek track t.
+• Each scheduling algorithm generates an ordering according to which the m-1 requests are
+serviced from the starting track and calculates the distance of the tracks traversed.
