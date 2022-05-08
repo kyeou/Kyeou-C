@@ -1,5 +1,5 @@
 # Kyeou-C
-c++ stuff
+C lab simluations for Operating Systems
 
 Lab 1:
 Objective:
@@ -67,3 +67,32 @@ o turnaround_time: the sum of the total CPU time and the waiting time (alternati
 the difference between the end time and the arrival time)
 • Calculate the values for the start_time, end_time, and turnaround_time for each process
 based on the selected scheduling algorithm.
+
+Lab 3:
+Objective:
+To implement resource allocation and demonstrate deadlock avoidance using the Banker's
+algorithm.
+Specification:
+The program simulates resource allocation to requesting processes and demonstrates deadlock
+avoidance with the Banker's algorithm. A menu controls the operations, and each choice calls
+the appropriate procedure, where the choices are:
+1) Enter parameters
+2) Run the Banker's algorithm to determine a safe sequence
+3) Quit program and free memory
+Assignment:
+ The program uses a claim graph consisting of processes, multi-unit resources, request edges,
+allocation edges, and claim edges to represent the state of allocated resources to processes.
+ The graph can be represented by a set of arrays/vectors:
+o Resource vector: an m-element vector, where m is the number of resources and each
+entry resource[j] records the total number of units of resource j.
+o Available vector: an m-element vector, where m is the number of resources and each
+entry available[j] records the number of units of resource j that are available.
+o Max claims array: an nxm-element array, where m is the number of resources and n is
+the number of processes, and each entry maxclaim[i][j] contains an integer that
+records the maximum number of units of resource j that process i may ever request.
+o Allocation array: an nxm-element array, where m is the number of resources and n is
+the number of processes, and each entry allocation[i][j] contains an integer that
+records the number of units of resource j that process i has actually been allocated.
+o Need array: an nxm array, where m is the number of resources and n is the number of
+processes, and each entry need[i][j] contains an integer that records the number of
+units of resource j that process i may need in the future.
