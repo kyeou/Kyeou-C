@@ -107,7 +107,8 @@ void destroy(int **child)
     else
     {
         IF_THEN(PCB[**child].next, ridNexts(&(PCB[**child].next)))
-        PCB[**child].parent = -1;
+        PCB[**child]
+    .parent = -1;
         *child = NULL;
     }
 }
