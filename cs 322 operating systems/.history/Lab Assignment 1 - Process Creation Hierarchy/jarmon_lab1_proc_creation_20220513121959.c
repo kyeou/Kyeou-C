@@ -68,7 +68,7 @@ void create()
     newC = aoc;
     if (!(PCB[par].child))
     {
-        PCB[par].child = ALLOC(1, int);
+        PCB[par].child = ALLOC(1, );
         *(PCB[par].child) = newC;
         PCB[newC].parent = par;
     }

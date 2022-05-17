@@ -161,7 +161,7 @@ void entParms()
     FOR_PROC
     {
 
-        printf("Enter number of units of each resource (r0 to r%d) ALLOCated to process p%d: ", res_amt - 1, p);
+        printf("Enter number of units of each resource (r0 to r%d) allocated to process p%d: ", res_amt - 1, p);
         // INT_INPUT3("", PV[p].CV[0].current, PV[p].CV[1].current, PV[p].CV[2].current);
         for (int i = 0; i < res_amt; i++)
         {

@@ -111,6 +111,8 @@ void entParms()
 
     } // end for
 
+   
+
     seq_low_copy = (int *)malloc(lc * sizeof(int));
     for (int i = 0; i < lc; i++)
     {
@@ -118,6 +120,7 @@ void entParms()
     }
 
     sort();
+
 }
 
 void print_trav()
@@ -258,9 +261,9 @@ void scan()
 
     if (direction == 0)
     {
-        for (int i = 0; i < lc; i++)
+        for (int i = lc - 1; i > -1; i--)
         {
-            traversal[seq_count] = seq_low[i];
+            traversal[seq_count] = seq_low_copy[i];
             distance += ABS_VAL(traversal[seq_count] - traversal[seq_count - 1]);
             seq_count++;
         }
@@ -280,9 +283,9 @@ void scan()
             distance += ABS_VAL(traversal[seq_count] - traversal[seq_count - 1]);
             seq_count++;
         }
-        for (int i = 0; i < lc; i++)
+        for (int i = lc - 1; i > -1; i--)
         {
-            traversal[seq_count] = seq_low[i];
+            traversal[seq_count] = seq_low_copy[i];
             distance += ABS_VAL(traversal[seq_count] - traversal[seq_count - 1]);
             seq_count++;
         }
@@ -364,7 +367,7 @@ int main()
         printf("1) Enter parameters\n");
         printf("2) Calculate distance to traverse tracks using FIFO\n");
         printf("3) Calculate distance to traverse tracks using SSTF\n");
-        printf("4) Calculate distance to traverse tracks using Scanv\n");
+        printf("4) Calculate distance to traverse tracks using Scan\n");
         printf("5) Calculate distance to traverse tracks using C-Scan\n");
         printf("6) Quit program and free memory\n\n");
         INT_INPUT("Enter selection: ", c);
@@ -399,9 +402,9 @@ int main()
 
 
 1
-5
-5
-12 3 7 4
+6
+8
+3 6 4 7 10
 2
 3
 4
