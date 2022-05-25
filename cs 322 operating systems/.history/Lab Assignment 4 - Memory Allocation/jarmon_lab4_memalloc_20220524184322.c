@@ -170,7 +170,7 @@ void entParms()
     INT_INPUT("Enter hole-fitting algorithm (0=first fit, 1=best_fit): ", fit_bool);
 }
 
-void allocate()
+void ALLOCate()
 {
 
     amt++;
@@ -307,11 +307,11 @@ int main()
     int c = -1;
     while (c != 5)
     {
-        printf("\nMemory Allocation\n");
+        printf("\nMemory ALLOCation\n");
         printf("-----------------\n");
         printf("1) Enter parameters\n");
-        printf("2) Allocate memory for block\n");
-        printf("3) Deallocate memory for block\n");
+        printf("2) ALLOCate memory for block\n");
+        printf("3) DeALLOCate memory for block\n");
         printf("4) Defragment memory\n");
         printf("5) Quit program\n\n");
 
@@ -322,7 +322,7 @@ int main()
             entParms();
             break;
         case 2:
-            allocate();
+            ALLOCate();
             break;
         case 3:
             delloc();

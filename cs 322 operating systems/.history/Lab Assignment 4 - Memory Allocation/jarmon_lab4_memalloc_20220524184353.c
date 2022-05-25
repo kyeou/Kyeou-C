@@ -307,7 +307,7 @@ int main()
     int c = -1;
     while (c != 5)
     {
-        printf("\nMemory Allocation\n");
+        printf("\nMemory Alloation\n");
         printf("-----------------\n");
         printf("1) Enter parameters\n");
         printf("2) Allocate memory for block\n");
@@ -322,7 +322,7 @@ int main()
             entParms();
             break;
         case 2:
-            allocate();
+            ALLOCate();
             break;
         case 3:
             delloc();

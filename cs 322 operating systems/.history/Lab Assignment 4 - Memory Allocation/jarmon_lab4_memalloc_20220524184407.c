@@ -322,7 +322,7 @@ int main()
             entParms();
             break;
         case 2:
-            allocate();
+            allate();
             break;
         case 3:
             delloc();
