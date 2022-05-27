@@ -97,7 +97,7 @@ o Need array: an nxm array, where m is the number of resources and n is the numb
 processes, and each entry need[i][j] contains an integer that records the number of
 units of resource j that process i may need in the future.
 
-Lab 4:
+# Lab 4:
 Objective:
 To simulate memory allocation with hole-fitting algorithms (First-fit, Best-fit) and
 implement deallocation and defragmentation of memory blocks.
@@ -123,7 +123,7 @@ rejected.\
 • Defragmentation compacts the blocks to be contiguous, and coalesces the holes into
 one hole at the far--right end (highest memory addresses) of physical memory.
 
-Lab 5:
+# Lab 5:
 Objective:
 • To compare the performance of disk scheduling algorithms:
 First-in-first-out (FIFO), Shortest-seek-time-first (SSTF), Scan, and C-Scan.
