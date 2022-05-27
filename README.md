@@ -2,7 +2,7 @@
 C lab simluations for Operating Systems
 
 # Lab 1:
-Objective:
+Objective:\
 To simulate process creation and destruction when implemented with linked lists.
 Specification:
 The program creates/destroys child processes based on choosing from a menu of choices, where each
@@ -36,7 +36,7 @@ PCB[p]:\
 ▪ deallocate the element q from the linked list
 
 # Lab 2:
-Objective:
+Objective:\
 To calculate the timing parameters of batch processes based on different scheduling algorithms.
 Specification:
 The program mimics the execution of different processes under different scheduling algorithms.
@@ -69,7 +69,7 @@ the difference between the end time and the arrival time)\
 based on the selected scheduling algorithm.
 
 # Lab 3:
-Objective:
+Objective:\
 To implement resource allocation and demonstrate deadlock avoidance using the Banker's
 algorithm.
 Specification:
@@ -98,7 +98,7 @@ processes, and each entry need[i][j] contains an integer that records the number
 units of resource j that process i may need in the future.
 
 # Lab 4:
-Objective:
+Objective:\
 To simulate memory allocation with hole-fitting algorithms (First-fit, Best-fit) and
 implement deallocation and defragmentation of memory blocks.
 Specification:
@@ -124,7 +124,7 @@ rejected.\
 one hole at the far--right end (highest memory addresses) of physical memory.
 
 # Lab 5:
-Objective:
+Objective:\
 • To compare the performance of disk scheduling algorithms:
 First-in-first-out (FIFO), Shortest-seek-time-first (SSTF), Scan, and C-Scan.
 Specification:\
