@@ -1,7 +1,7 @@
 # Kyeou-C
 C lab simluations for Operating Systems
 
-Lab 1:
+# Lab 1:
 Objective:
 To simulate process creation and destruction when implemented with linked lists.
 Specification:
@@ -13,29 +13,29 @@ choice calls the appropriate procedure, where the choices are:
 4) Quit program and free memory
 Assignment:
 • Create a process creation hierarchy as a dynamic array of length n which references the process
-control blocks (PCBs), indexed 0 to n-1
-• Each PCB is a structure consisting of two fields:
-o parent: a PCB index corresponding to the process’ creator
+control blocks (PCBs), indexed 0 to n-1\
+• Each PCB is a structure consisting of two fields:\
+o parent: a PCB index corresponding to the process’ creator\
 o children: a pointer to a linked list, where each node contains the PCB index of one child
-process and a link to the next child in the list
-• The necessary functions are simplified as follows:
+process and a link to the next child in the list\
+• The necessary functions are simplified as follows:\
 o create() represents the create function, which prompts for the parent process PCB[p]. The
 function creates a new child process PCB[q] of process PCB[p] by performing the following
-tasks:
-▪ allocate a free PCB[q]
-▪ record the parent's index, p, in PCB[q]
-▪ initialize the list of children of PCB[q] as empty (NULL)
+tasks:\
+▪ allocate a free PCB[q]\
+▪ record the parent's index, p, in PCB[q]\
+▪ initialize the list of children of PCB[q] as empty (NULL)\
 ▪ create a new link containing the child's index q and append the link to the linked list
-of PCB[p]
+of PCB[p]\
 o destroy() represents the destroy function, which prompts for the parent process PCB[p]. The
 function recursively destroys all descendent processes (child, grandchild, etc.) of process
 PCB[p] by performing the following tasks: for each element q on the linked list of children of
-PCB[p]:
-▪ destroy(q) /* recursively destroy all descendants */
-▪ free PCB[q]
+PCB[p]:\
+▪ destroy(q) /* recursively destroy all descendants */\
+▪ free PCB[q]\
 ▪ deallocate the element q from the linked list
 
-Lab 2:
+# Lab 2:
 Objective:
 To calculate the timing parameters of batch processes based on different scheduling algorithms.
 Specification:
@@ -49,26 +49,26 @@ are:
 4) Schedule processes with SRT algorithm
 5) Quit program and free memory
 Assignment:
-• Create a table to record the status of different processes based on the following parameters:
-o id: the unique identifier of the process
+• Create a table to record the status of different processes based on the following parameters:\
+o id: the unique identifier of the process\
 o arrival: the point in time when the process enters the ready list to be executed by the
-CPU
+CPU\
 o total_cpu: the amount of CPU time the process will consume between arrival and
-departure
+departure\
 o total_remaining: the amount of CPU time remaining for a process to complete {used
-for SRT scheduling only}
+for SRT scheduling only}\
 o done: a flag that indicates whether the process has been successfully completed (1) or
-not (0)
-o start_time: the time when the process has begun being executed by the CPU
+not (0)\
+o start_time: the time when the process has begun being executed by the CPU\
 o already_started: a flag that indicated whether the process has already begun (1) or
-not (0) {used for SRT scheduling only}
-o end_time: the time when the process has been completed by the CPU
+not (0) {used for SRT scheduling only}\
+o end_time: the time when the process has been completed by the CPU\
 o turnaround_time: the sum of the total CPU time and the waiting time (alternatively:
-the difference between the end time and the arrival time)
+the difference between the end time and the arrival time)\
 • Calculate the values for the start_time, end_time, and turnaround_time for each process
 based on the selected scheduling algorithm.
 
-Lab 3:
+# Lab 3:
 Objective:
 To implement resource allocation and demonstrate deadlock avoidance using the Banker's
 algorithm.
@@ -84,15 +84,15 @@ Assignment:
 allocation edges, and claim edges to represent the state of allocated resources to processes.
  The graph can be represented by a set of arrays/vectors:
 o Resource vector: an m-element vector, where m is the number of resources and each
-entry resource[j] records the total number of units of resource j.
+entry resource[j] records the total number of units of resource j.\
 o Available vector: an m-element vector, where m is the number of resources and each
-entry available[j] records the number of units of resource j that are available.
+entry available[j] records the number of units of resource j that are available.\
 o Max claims array: an nxm-element array, where m is the number of resources and n is
 the number of processes, and each entry maxclaim[i][j] contains an integer that
-records the maximum number of units of resource j that process i may ever request.
+records the maximum number of units of resource j that process i may ever request.\
 o Allocation array: an nxm-element array, where m is the number of resources and n is
 the number of processes, and each entry allocation[i][j] contains an integer that
-records the number of units of resource j that process i has actually been allocated.
+records the number of units of resource j that process i has actually been allocated.\
 o Need array: an nxm array, where m is the number of resources and n is the number of
 processes, and each entry need[i][j] contains an integer that records the number of
 units of resource j that process i may need in the future.
@@ -111,15 +111,15 @@ operations, and each choice calls the appropriate procedure, where the choices a
 4) Defragment memory
 5) Quit program and free memory
 Assignment:
-• The size of physical memory is represented by an integer pm_size.
+• The size of physical memory is represented by an integer pm_size.\
 • The allocated blocks are contained within a linked list, where each allocated block is
 a structure containing: (1) the id, (2) the starting address of the block, (3) the ending
-address of the block, and (4) a link to the next allocated block.
+address of the block, and (4) a link to the next allocated block.\
 • Each allocation request prompts for: (1) the id and (2) the size of the new block. If the
 id is a duplicate and/or the remaining physical memory is not enough to fit the
-request, the request is rejected, and an appropriate message is displayed.
+request, the request is rejected, and an appropriate message is displayed.\
 • Each deallocation request prompts for the id. If the id is invalid, the request is
-rejected.
+rejected.\
 • Defragmentation compacts the blocks to be contiguous, and coalesces the holes into
 one hole at the far--right end (highest memory addresses) of physical memory.
 
@@ -127,10 +127,10 @@ Lab 5:
 Objective:
 • To compare the performance of disk scheduling algorithms:
 First-in-first-out (FIFO), Shortest-seek-time-first (SSTF), Scan, and C-Scan.
-Specification:
+Specification:\
 • The program compares the disk scheduling algorithms: First-in-first-out (FIFO), Shortest-
 seek-time-first (SSTF), Scan, and C-Scan in terms of traversing a set of tracks input by
-the user, and calculates the total distance of the tracks traversed.
+the user, and calculates the total distance of the tracks traversed.\
 • A menu controls the operations, and each choice calls the appropriate procedure, where
 the choices are:
 1) Enter parameters
@@ -141,6 +141,6 @@ the choices are:
 6) Quit program and free memory
 Assignment:
 • For a sequence of size m, a disk scheduling algorithm accepts a starting track followed by
-a sequence of m-1 integers, where each index value t is a request to seek track t.
+a sequence of m-1 integers, where each index value t is a request to seek track t.\
 • Each scheduling algorithm generates an ordering according to which the m-1 requests are
 serviced from the starting track and calculates the distance of the tracks traversed.
