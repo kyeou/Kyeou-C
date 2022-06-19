@@ -2,8 +2,8 @@
 
 int main()
 {
-    FILE *fp = fopen("D://results.txt", "a");
-    for (int i = 20000000; i < 20000001; i++)
+    FILE *fp = fopen("D://results.txt", "w");
+    for (int i = 0; i < 20000001; i++)
     {
         unsigned long number = i;
         fprintf(fp, "%d: ", number);
